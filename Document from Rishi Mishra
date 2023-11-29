@@ -1,0 +1,2079 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Practical 6   \n",
+        "Name: Shantanu Ingle      \n",
+        "Sec: A      \n",
+        "Batch: A4       \n",
+        "Roll no.: 57"
+      ],
+      "metadata": {
+        "id": "FD6bU_T2ZdyD"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Basic analysis of IRIS dataset (Iris.csv)"
+      ],
+      "metadata": {
+        "id": "2xUQn2ckm_k5"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Load the iris data from a given csv file into a data frame and print the shape of\n",
+        "the data, type of the data and first and last 4 rows (Iris_data_sample.csv)"
+      ],
+      "metadata": {
+        "id": "osC44cWEnBSB"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [],
+      "metadata": {
+        "id": "ibG63e0UZchw"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "import numpy as np"
+      ],
+      "metadata": {
+        "id": "s5FSZyWinFFg"
+      },
+      "execution_count": 6,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from google.colab import drive\n",
+        "drive.mount('/content/drive')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "RuRwFPaunVvm",
+        "outputId": "b95f3280-8c2a-41a3-eb55-564a96ef892b"
+      },
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Drive already mounted at /content/drive; to attempt to forcibly remount, call drive.mount(\"/content/drive\", force_remount=True).\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "iris_df = pd.read_csv('Iris_dataset.csv')"
+      ],
+      "metadata": {
+        "id": "A4-v881dnXb7"
+      },
+      "execution_count": 9,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(iris_df)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "jXV3hubnoTdW",
+        "outputId": "fde884ad-58b9-45e7-f18f-85a2cc21f629"
+      },
+      "execution_count": 10,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "     Unnamed: 0 SepalLengthCm  SepalWidthCm PetalLengthCm  PetalWidthCm  \\\n",
+            "0             1           5.1           3.5           1.4           0.2   \n",
+            "1             2           4.9           NaN           1.4           0.2   \n",
+            "2             3           4.7           3.2           1.3           0.2   \n",
+            "3             4            ??           3.1           1.5           0.2   \n",
+            "4             5             5           3.6           ###           0.2   \n",
+            "..          ...           ...           ...           ...           ...   \n",
+            "145         146           6.7           3.0           5.2           2.3   \n",
+            "146         147           6.3           2.5             5           1.9   \n",
+            "147         148           6.5           3.0           5.2           2.0   \n",
+            "148         149           6.2           3.4           5.4           2.3   \n",
+            "149         150           5.9           3.0           5.1           1.8   \n",
+            "\n",
+            "            Species  \n",
+            "0       Iris-setosa  \n",
+            "1               NaN  \n",
+            "2       Iris-setosa  \n",
+            "3       Iris-setosa  \n",
+            "4       Iris-setosa  \n",
+            "..              ...  \n",
+            "145  Iris-virginica  \n",
+            "146  Iris-virginica  \n",
+            "147  Iris-virginica  \n",
+            "148  Iris-virginica  \n",
+            "149  Iris-virginica  \n",
+            "\n",
+            "[150 rows x 6 columns]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"Shape of the data:\", iris_df.shape)\n",
+        "\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "0m0kNHUho3Zb",
+        "outputId": "3f406875-4635-4373-b011-b05e5cd2c877"
+      },
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Shape of the data: (150, 6)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "print(\"Type of the data:\")\n",
+        "print(iris_df.dtypes)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "cMpdwWCxpK1e",
+        "outputId": "69a01a8e-9fd3-43d6-82c5-fa284a031617"
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Type of the data:\n",
+            "Unnamed: 0         int64\n",
+            "SepalLengthCm     object\n",
+            "SepalWidthCm     float64\n",
+            "PetalLengthCm     object\n",
+            "PetalWidthCm     float64\n",
+            "Species           object\n",
+            "dtype: object\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "print(\"First 4 rows:\")\n",
+        "print(iris_df.head(4))\n",
+        "\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "b5yfVMoWpfgx",
+        "outputId": "5cafeb4b-51f4-4ba2-dba6-547c2fa9c3df"
+      },
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "First 4 rows:\n",
+            "   Unnamed: 0 SepalLengthCm  SepalWidthCm PetalLengthCm  PetalWidthCm  \\\n",
+            "0           1           5.1           3.5           1.4           0.2   \n",
+            "1           2           4.9           NaN           1.4           0.2   \n",
+            "2           3           4.7           3.2           1.3           0.2   \n",
+            "3           4            ??           3.1           1.5           0.2   \n",
+            "\n",
+            "       Species  \n",
+            "0  Iris-setosa  \n",
+            "1          NaN  \n",
+            "2  Iris-setosa  \n",
+            "3  Iris-setosa  \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "print(\"Last 4 rows:\")\n",
+        "print(iris_df.tail(4))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "XdDfFdnCplsL",
+        "outputId": "9044af9a-bbde-430e-da67-1c3af74fc2de"
+      },
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Last 4 rows:\n",
+            "     Unnamed: 0 SepalLengthCm  SepalWidthCm PetalLengthCm  PetalWidthCm  \\\n",
+            "146         147           6.3           2.5             5           1.9   \n",
+            "147         148           6.5           3.0           5.2           2.0   \n",
+            "148         149           6.2           3.4           5.4           2.3   \n",
+            "149         150           5.9           3.0           5.1           1.8   \n",
+            "\n",
+            "            Species  \n",
+            "146  Iris-virginica  \n",
+            "147  Iris-virginica  \n",
+            "148  Iris-virginica  \n",
+            "149  Iris-virginica  \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "2. Replace the abnormal symbols i.e. ??, ## to null value i.e. NaN"
+      ],
+      "metadata": {
+        "id": "Ci1HSCS6pxv_"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "iris_df.replace({'??': np.nan, '##': np.nan}, inplace=True)"
+      ],
+      "metadata": {
+        "id": "awvpt0s7ppEc"
+      },
+      "execution_count": 15,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "3. Describe the dataset, and find number of observations, missing values and\n",
+        "nan values"
+      ],
+      "metadata": {
+        "id": "br5SUrNMqixZ"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"Dataset Description:\")\n",
+        "print(iris_df.describe())\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "KaPvmhEmqb9y",
+        "outputId": "4f93fd69-c49b-4ac4-d9f3-44edbf225eb7"
+      },
+      "execution_count": 16,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Dataset Description:\n",
+            "       Unnamed: 0  SepalWidthCm  PetalWidthCm\n",
+            "count  150.000000    149.000000    150.000000\n",
+            "mean    75.500000      3.054362      1.198667\n",
+            "std     43.445368      0.435034      0.763161\n",
+            "min      1.000000      2.000000      0.100000\n",
+            "25%     38.250000      2.800000      0.300000\n",
+            "50%     75.500000      3.000000      1.300000\n",
+            "75%    112.750000      3.300000      1.800000\n",
+            "max    150.000000      4.400000      2.500000\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"\\nDataset Information:\")\n",
+        "print(iris_df.info())\n",
+        "\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "LCSmNhr8q9NI",
+        "outputId": "01db13e2-3952-43ff-d79e-21374612eb7e"
+      },
+      "execution_count": 17,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "Dataset Information:\n",
+            "<class 'pandas.core.frame.DataFrame'>\n",
+            "RangeIndex: 150 entries, 0 to 149\n",
+            "Data columns (total 6 columns):\n",
+            " #   Column         Non-Null Count  Dtype  \n",
+            "---  ------         --------------  -----  \n",
+            " 0   Unnamed: 0     150 non-null    int64  \n",
+            " 1   SepalLengthCm  149 non-null    object \n",
+            " 2   SepalWidthCm   149 non-null    float64\n",
+            " 3   PetalLengthCm  149 non-null    object \n",
+            " 4   PetalWidthCm   150 non-null    float64\n",
+            " 5   Species        149 non-null    object \n",
+            "dtypes: float64(2), int64(1), object(3)\n",
+            "memory usage: 7.2+ KB\n",
+            "None\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "missing_values = iris_df.isnull().sum()\n",
+        "nan_values = iris_df.isna().sum()\n",
+        "\n",
+        "print(missing_values)\n",
+        "print(\"Number of Missing Values:\", missing_values.sum())\n",
+        "print(\"\\n\",nan_values)\n",
+        "print(\"Number of NaN Values:\", nan_values.sum())"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "fimAjdEHrJYe",
+        "outputId": "4bad6f72-5f3c-4540-e2cf-63bbf1d5becf"
+      },
+      "execution_count": 18,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Unnamed: 0       0\n",
+            "SepalLengthCm    1\n",
+            "SepalWidthCm     1\n",
+            "PetalLengthCm    1\n",
+            "PetalWidthCm     0\n",
+            "Species          1\n",
+            "dtype: int64\n",
+            "Number of Missing Values: 4\n",
+            "\n",
+            " Unnamed: 0       0\n",
+            "SepalLengthCm    1\n",
+            "SepalWidthCm     1\n",
+            "PetalLengthCm    1\n",
+            "PetalWidthCm     0\n",
+            "Species          1\n",
+            "dtype: int64\n",
+            "Number of NaN Values: 4\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "4. View basic statistical details like percentile, mean, std deviation, mode,\n",
+        "variance, skewness of iris data"
+      ],
+      "metadata": {
+        "id": "qk-qDAJ6tUnU"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"Mode values are: \")\n",
+        "iris_df.mode().loc[0]"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "d82xnDfGuOXk",
+        "outputId": "c0df71ef-d8cb-4995-a6dc-50cbd1c82ddd"
+      },
+      "execution_count": 19,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Mode values are: \n"
+          ]
+        },
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "Unnamed: 0                     1\n",
+              "SepalLengthCm                  5\n",
+              "SepalWidthCm                 3.0\n",
+              "PetalLengthCm                1.5\n",
+              "PetalWidthCm                 0.2\n",
+              "Species          Iris-versicolor\n",
+              "Name: 0, dtype: object"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 19
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"Percentile: \")\n",
+        "print(iris_df.quantile(0.75))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "nafOwa6svsuD",
+        "outputId": "b7d5dea7-0cb4-4e67-82c5-facb9c7dc1e6"
+      },
+      "execution_count": 22,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Percentile: \n",
+            "Unnamed: 0      112.75\n",
+            "SepalWidthCm      3.30\n",
+            "PetalWidthCm      1.80\n",
+            "Name: 0.75, dtype: float64\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "<ipython-input-22-5fd7a765c51a>:2: FutureWarning: The default value of numeric_only in DataFrame.quantile is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  print(iris_df.quantile(0.75))\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"Mean values are: \")\n",
+        "print(iris_df.mean())"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "QcYe92AR0Cfz",
+        "outputId": "c311e50f-7b4c-4208-95cb-204bdb872f6c"
+      },
+      "execution_count": 23,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Mean values are: \n",
+            "Unnamed: 0      75.500000\n",
+            "SepalWidthCm     3.054362\n",
+            "PetalWidthCm     1.198667\n",
+            "dtype: float64\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "<ipython-input-23-d6acda33f0a7>:2: FutureWarning: The default value of numeric_only in DataFrame.mean is deprecated. In a future version, it will default to False. In addition, specifying 'numeric_only=None' is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  print(iris_df.mean())\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"Skew values are: \")\n",
+        "print(iris_df.skew())"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ZIXEAn3U0W5E",
+        "outputId": "609fb2fe-4d87-4856-b984-8edea24f3f50"
+      },
+      "execution_count": 24,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Skew values are: \n",
+            "Unnamed: 0       0.000000\n",
+            "SepalLengthCm    0.313900\n",
+            "SepalWidthCm     0.330492\n",
+            "PetalWidthCm    -0.104997\n",
+            "dtype: float64\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "<ipython-input-24-0b8a7573425a>:2: FutureWarning: The default value of numeric_only in DataFrame.skew is deprecated. In a future version, it will default to False. In addition, specifying 'numeric_only=None' is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  print(iris_df.skew())\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"Standard deviation: \")\n",
+        "print(iris_df.std())"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "C2VkF4zI9iTn",
+        "outputId": "027ac9dc-8f2c-421b-98ed-d0da93fc601d"
+      },
+      "execution_count": 25,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Standard deviation: \n",
+            "Unnamed: 0      43.445368\n",
+            "SepalWidthCm     0.435034\n",
+            "PetalWidthCm     0.763161\n",
+            "dtype: float64\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "<ipython-input-25-657f5ffc52a1>:2: FutureWarning: The default value of numeric_only in DataFrame.std is deprecated. In a future version, it will default to False. In addition, specifying 'numeric_only=None' is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  print(iris_df.std())\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"Variance: \")\n",
+        "print(iris_df.var())"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Y19ObfUfAJL8",
+        "outputId": "d0b1ffb0-5e32-4f64-c9c6-811b84cb2ae1"
+      },
+      "execution_count": 26,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Variance: \n",
+            "Unnamed: 0      1887.500000\n",
+            "SepalWidthCm       0.189254\n",
+            "PetalWidthCm       0.582414\n",
+            "dtype: float64\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "<ipython-input-26-970acc0d0df4>:2: FutureWarning: The default value of numeric_only in DataFrame.var is deprecated. In a future version, it will default to False. In addition, specifying 'numeric_only=None' is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  print(iris_df.var())\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "5.View basic statistical details like percentile, mean, std deviation, mode,\n",
+        "variance, skewness of each species (setosa, versicolor, virginica) from iris\n",
+        "data."
+      ],
+      "metadata": {
+        "id": "N681RZeKAtqA"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "grouped_species = iris_df.groupby('Species')\n",
+        "\n",
+        "\n",
+        "for species, group_data in grouped_species:\n",
+        "    print(f\"\\nSpecies: {species}\")\n",
+        "\n",
+        "\n",
+        "    statistical_details = iris_df.quantile(0.75)\n",
+        "    print(\"Basic Statistical Details:\")\n",
+        "    print(statistical_details)\n",
+        "\n",
+        "\n",
+        "    mode_values = group_data.mode().iloc[0]\n",
+        "    print(\"\\nMode Values:\")\n",
+        "    print(mode_values)\n",
+        "\n",
+        "\n",
+        "    variance_values = group_data.var()\n",
+        "    print(\"\\nVariance:\")\n",
+        "    print(variance_values)\n",
+        "\n",
+        "\n",
+        "    skewness_values = group_data.skew()\n",
+        "    print(\"\\nSkewness:\")\n",
+        "    print(skewness_values)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "fRRtqHhHAMjn",
+        "outputId": "77204916-ae66-47c6-a7db-2e85e9dcc889"
+      },
+      "execution_count": 28,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "Species: Iris-setosa\n",
+            "Basic Statistical Details:\n",
+            "Unnamed: 0      112.75\n",
+            "SepalWidthCm      3.30\n",
+            "PetalWidthCm      1.80\n",
+            "Name: 0.75, dtype: float64\n",
+            "\n",
+            "Mode Values:\n",
+            "Unnamed: 0                 1\n",
+            "SepalLengthCm              5\n",
+            "SepalWidthCm             3.4\n",
+            "PetalLengthCm            1.5\n",
+            "PetalWidthCm             0.2\n",
+            "Species          Iris-setosa\n",
+            "Name: 0, dtype: object\n",
+            "\n",
+            "Variance:\n",
+            "Unnamed: 0      205.187075\n",
+            "SepalWidthCm      0.144490\n",
+            "PetalWidthCm      0.011692\n",
+            "dtype: float64\n",
+            "\n",
+            "Skewness:\n",
+            "Unnamed: 0      -0.008853\n",
+            "SepalLengthCm    0.063011\n",
+            "SepalWidthCm     0.068839\n",
+            "PetalWidthCm     1.167729\n",
+            "dtype: float64\n",
+            "\n",
+            "Species: Iris-versicolor\n",
+            "Basic Statistical Details:\n",
+            "Unnamed: 0      112.75\n",
+            "SepalWidthCm      3.30\n",
+            "PetalWidthCm      1.80\n",
+            "Name: 0.75, dtype: float64\n",
+            "\n",
+            "Mode Values:\n",
+            "Unnamed: 0                    51\n",
+            "SepalLengthCm                5.5\n",
+            "SepalWidthCm                 3.0\n",
+            "PetalLengthCm                4.5\n",
+            "PetalWidthCm                 1.3\n",
+            "Species          Iris-versicolor\n",
+            "Name: 0, dtype: object\n",
+            "\n",
+            "Variance:\n",
+            "Unnamed: 0      212.500000\n",
+            "SepalWidthCm      0.098469\n",
+            "PetalWidthCm      0.039106\n",
+            "dtype: float64\n",
+            "\n",
+            "Skewness:\n",
+            "Unnamed: 0       0.000000\n",
+            "SepalLengthCm    0.105378\n",
+            "SepalWidthCm    -0.362845\n",
+            "PetalLengthCm   -0.606508\n",
+            "PetalWidthCm    -0.031180\n",
+            "dtype: float64\n",
+            "\n",
+            "Species: Iris-virginica\n",
+            "Basic Statistical Details:\n",
+            "Unnamed: 0      112.75\n",
+            "SepalWidthCm      3.30\n",
+            "PetalWidthCm      1.80\n",
+            "Name: 0.75, dtype: float64\n",
+            "\n",
+            "Mode Values:\n",
+            "Unnamed: 0                  101\n",
+            "SepalLengthCm               6.3\n",
+            "SepalWidthCm                3.0\n",
+            "PetalLengthCm               5.1\n",
+            "PetalWidthCm                1.8\n",
+            "Species          Iris-virginica\n",
+            "Name: 0, dtype: object\n",
+            "\n",
+            "Variance:\n",
+            "Unnamed: 0      212.500000\n",
+            "SepalWidthCm      0.104004\n",
+            "PetalWidthCm      0.075433\n",
+            "dtype: float64\n",
+            "\n",
+            "Skewness:\n",
+            "Unnamed: 0       0.000000\n",
+            "SepalLengthCm    0.118015\n",
+            "SepalWidthCm     0.365949\n",
+            "PetalLengthCm    0.549445\n",
+            "PetalWidthCm    -0.129477\n",
+            "dtype: float64\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "<ipython-input-28-0cdc861427b4>:8: FutureWarning: The default value of numeric_only in DataFrame.quantile is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  statistical_details = iris_df.quantile(0.75)\n",
+            "<ipython-input-28-0cdc861427b4>:18: FutureWarning: The default value of numeric_only in DataFrame.var is deprecated. In a future version, it will default to False. In addition, specifying 'numeric_only=None' is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  variance_values = group_data.var()\n",
+            "<ipython-input-28-0cdc861427b4>:23: FutureWarning: The default value of numeric_only in DataFrame.skew is deprecated. In a future version, it will default to False. In addition, specifying 'numeric_only=None' is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  skewness_values = group_data.skew()\n",
+            "<ipython-input-28-0cdc861427b4>:8: FutureWarning: The default value of numeric_only in DataFrame.quantile is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  statistical_details = iris_df.quantile(0.75)\n",
+            "<ipython-input-28-0cdc861427b4>:18: FutureWarning: The default value of numeric_only in DataFrame.var is deprecated. In a future version, it will default to False. In addition, specifying 'numeric_only=None' is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  variance_values = group_data.var()\n",
+            "<ipython-input-28-0cdc861427b4>:23: FutureWarning: The default value of numeric_only in DataFrame.skew is deprecated. In a future version, it will default to False. In addition, specifying 'numeric_only=None' is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  skewness_values = group_data.skew()\n",
+            "<ipython-input-28-0cdc861427b4>:8: FutureWarning: The default value of numeric_only in DataFrame.quantile is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  statistical_details = iris_df.quantile(0.75)\n",
+            "<ipython-input-28-0cdc861427b4>:18: FutureWarning: The default value of numeric_only in DataFrame.var is deprecated. In a future version, it will default to False. In addition, specifying 'numeric_only=None' is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  variance_values = group_data.var()\n",
+            "<ipython-input-28-0cdc861427b4>:23: FutureWarning: The default value of numeric_only in DataFrame.skew is deprecated. In a future version, it will default to False. In addition, specifying 'numeric_only=None' is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  skewness_values = group_data.skew()\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "6. Drop Id column from a given Dataframe and print the modified part"
+      ],
+      "metadata": {
+        "id": "scV_dy08BMbK"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "iris_df.drop(iris_df.columns[0], axis=1, inplace=True)\n",
+        "print(iris_df)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "JbkIH_HTBNcY",
+        "outputId": "ea4ca061-d104-44a2-b6d1-9277818536bb"
+      },
+      "execution_count": 31,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "    SepalLengthCm  SepalWidthCm PetalLengthCm  PetalWidthCm         Species\n",
+            "0             5.1           3.5           1.4           0.2     Iris-setosa\n",
+            "1             4.9           NaN           1.4           0.2             NaN\n",
+            "2             4.7           3.2           1.3           0.2     Iris-setosa\n",
+            "3             NaN           3.1           1.5           0.2     Iris-setosa\n",
+            "4               5           3.6           ###           0.2     Iris-setosa\n",
+            "..            ...           ...           ...           ...             ...\n",
+            "145           6.7           3.0           5.2           2.3  Iris-virginica\n",
+            "146           6.3           2.5             5           1.9  Iris-virginica\n",
+            "147           6.5           3.0           5.2           2.0  Iris-virginica\n",
+            "148           6.2           3.4           5.4           2.3  Iris-virginica\n",
+            "149           5.9           3.0           5.1           1.8  Iris-virginica\n",
+            "\n",
+            "[150 rows x 5 columns]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "7.Print the species and row number having maximum Sepal Length."
+      ],
+      "metadata": {
+        "id": "OPg63NnwEB-t"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "iris_df['SepalLengthCm'] = pd.to_numeric(iris_df['SepalLengthCm'], errors='coerce')\n",
+        "\n",
+        "\n",
+        "max_sepal_length_row = iris_df['SepalLengthCm'].idxmax()\n",
+        "\n",
+        "max_sepal_length_species = iris_df.loc[max_sepal_length_row, 'Species']\n",
+        "max_sepal_length_value = iris_df.loc[max_sepal_length_row, 'SepalLengthCm']\n",
+        "\n",
+        "print(f\"The species with the maximum Sepal Length is {max_sepal_length_species} in row {max_sepal_length_row}.\")\n",
+        "print(f\"The Sepal Length value is {max_sepal_length_value}.\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ww3qdGxOBYU-",
+        "outputId": "c7ca45e6-d36e-4d97-a837-233d3f76ad6a"
+      },
+      "execution_count": 36,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "The species with the maximum Sepal Length is Iris-virginica in row 131.\n",
+            "The Sepal Length value is 7.9.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "8.Print the Species and row number having minimum Petal Width."
+      ],
+      "metadata": {
+        "id": "CORBx7SEGwTH"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "iris_df['PetalLengthCm'] = pd.to_numeric(iris_df['PetalLengthCm'], errors='coerce')\n",
+        "\n",
+        "\n",
+        "min_petal_length_row = iris_df['PetalLengthCm'].idxmin()\n",
+        "\n",
+        "min_petal_length_species = iris_df.loc[min_petal_length_row, 'Species']\n",
+        "min_petal_length_value = iris_df.loc[min_petal_length_row, 'PetalLengthCm']\n",
+        "\n",
+        "print(f\"The species with the manimum Sepal Length is {min_petal_length_species} in row {min_petal_length_row+1}.\")\n",
+        "print(f\"The Sepal Length value is {min_petal_length_value}.\")"
+      ],
+      "metadata": {
+        "id": "1t2DZOonEljo",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "01660d3b-e0d1-4b74-dc02-4a0a01f7e534"
+      },
+      "execution_count": 40,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "The species with the manimum Sepal Length is Iris-setosa in row 23.\n",
+            "The Sepal Length value is 1.0.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "9.Sort all the rows by Sepal Length column"
+      ],
+      "metadata": {
+        "id": "DffBcu3dGyYu"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "sorted_iris_df = iris_df.sort_values(by='SepalLengthCm')\n",
+        "\n",
+        "print(sorted_iris_df)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "yZpPxndHG0UE",
+        "outputId": "cf263407-b422-49a1-ce02-4785a3627218"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "     Unnamed: 0 SepalLengthCm  SepalWidthCm PetalLengthCm  PetalWidthCm  \\\n",
+            "13           14           4.3           3.0           1.1           0.1   \n",
+            "42           43           4.4           3.2           1.3           0.2   \n",
+            "38           39           4.4           3.0           1.3           0.2   \n",
+            "8             9           4.4           2.9           1.4           0.2   \n",
+            "41           42           4.5           2.3           1.3           0.3   \n",
+            "..          ...           ...           ...           ...           ...   \n",
+            "117         118           7.7           3.8           6.7           2.2   \n",
+            "122         123           7.7           2.8           6.7           2.0   \n",
+            "135         136           7.7           3.0           6.1           2.3   \n",
+            "131         132           7.9           3.8           6.4           2.0   \n",
+            "3             4           NaN           3.1           1.5           0.2   \n",
+            "\n",
+            "            Species  \n",
+            "13      Iris-setosa  \n",
+            "42      Iris-setosa  \n",
+            "38      Iris-setosa  \n",
+            "8       Iris-setosa  \n",
+            "41      Iris-setosa  \n",
+            "..              ...  \n",
+            "117  Iris-virginica  \n",
+            "122  Iris-virginica  \n",
+            "135  Iris-virginica  \n",
+            "131  Iris-virginica  \n",
+            "3       Iris-setosa  \n",
+            "\n",
+            "[150 rows x 6 columns]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "gxEU0mumHpGz"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "10.Replace missing values of Petal Width by mean of Petal Width and Sepal Length by\n",
+        "mode of Sepal Length column."
+      ],
+      "metadata": {
+        "id": "yOJhaAcJHyY1"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "mean_petal_width = iris_df['PetalWidthCm'].mean()\n",
+        "iris_df['PetalWidthCm'].fillna(mean_petal_width, inplace=True)\n",
+        "\n",
+        "\n",
+        "mode_sepal_length = iris_df['SepalLengthCm'].mode().iloc[0]\n",
+        "iris_df['SepalLengthCm'].fillna(mode_sepal_length, inplace=True)"
+      ],
+      "metadata": {
+        "id": "2R72qVNMHzGZ"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "11.Print correlation matrix for this Iris dataset"
+      ],
+      "metadata": {
+        "id": "BrOjh4pBIO4U"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "correlation_matrix = iris_df.corr()\n",
+        "print(\"Correlation Matrix:\")\n",
+        "print(correlation_matrix)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "vNHDnibvIC87",
+        "outputId": "cd36f905-a1fb-485b-81fe-97ec8cb5b482"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Correlation Matrix:\n",
+            "              Unnamed: 0  SepalWidthCm  PetalWidthCm\n",
+            "Unnamed: 0      1.000000     -0.403090      0.899759\n",
+            "SepalWidthCm   -0.403090      1.000000     -0.359751\n",
+            "PetalWidthCm    0.899759     -0.359751      1.000000\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "<ipython-input-73-66189e9d7427>:1: FutureWarning: The default value of numeric_only in DataFrame.corr is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  correlation_matrix = iris_df.corr()\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "12. Perform correlation analysis on Petal width and Petal Length using Pearson\n",
+        "Correlation Coefficient. (using library scipy.stat and without using library)"
+      ],
+      "metadata": {
+        "id": "CBiWg5mmIjkk"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from scipy.stats import pearsonr"
+      ],
+      "metadata": {
+        "id": "8iXdqNCvIYX1"
+      },
+      "execution_count": 43,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#with scipy.stat library\n",
+        "pearson_corr = pearsonr(iris_df['PetalLengthCm'], iris_df['PetalWidthCm'])\n",
+        "print(\"Pearson Correlation Coefficient using scipy.stats:\", pearson_corr[0])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "IT0qCcD0Iqj4",
+        "outputId": "8501a04c-5dbc-4ef2-f0ce-f0cd7a94047a"
+      },
+      "execution_count": 53,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Pearson Correlation Coefficient using scipy.stats: 0.9620405969458075\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#without using scipy.stat library\n",
+        "iris_df['product']=iris_df['PetalLengthCm']*iris_df['PetalWidthCm']"
+      ],
+      "metadata": {
+        "id": "6Vs1E5Gt3HDf"
+      },
+      "execution_count": 61,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "iris_df"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 423
+        },
+        "id": "Sm-ma6ZhNdLp",
+        "outputId": "92985d95-13a9-4280-d2c8-a23b187b3553"
+      },
+      "execution_count": 55,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "     SepalLengthCm  SepalWidthCm  PetalLengthCm  PetalWidthCm         Species  \\\n",
+              "0              5.1           3.5            1.4           0.2     Iris-setosa   \n",
+              "1              4.9           NaN            1.4           0.2             NaN   \n",
+              "2              4.7           3.2            1.3           0.2     Iris-setosa   \n",
+              "3              NaN           3.1            1.5           0.2     Iris-setosa   \n",
+              "6              4.6           3.4            1.4           0.3     Iris-setosa   \n",
+              "..             ...           ...            ...           ...             ...   \n",
+              "145            6.7           3.0            5.2           2.3  Iris-virginica   \n",
+              "146            6.3           2.5            5.0           1.9  Iris-virginica   \n",
+              "147            6.5           3.0            5.2           2.0  Iris-virginica   \n",
+              "148            6.2           3.4            5.4           2.3  Iris-virginica   \n",
+              "149            5.9           3.0            5.1           1.8  Iris-virginica   \n",
+              "\n",
+              "     product  \n",
+              "0       0.28  \n",
+              "1       0.28  \n",
+              "2       0.26  \n",
+              "3       0.30  \n",
+              "6       0.42  \n",
+              "..       ...  \n",
+              "145    11.96  \n",
+              "146     9.50  \n",
+              "147    10.40  \n",
+              "148    12.42  \n",
+              "149     9.18  \n",
+              "\n",
+              "[148 rows x 6 columns]"
+            ],
+            "text/html": [
+              "\n",
+              "  <div id=\"df-0f20b16a-db30-4167-9cca-85934c7cbac3\" class=\"colab-df-container\">\n",
+              "    <div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>SepalLengthCm</th>\n",
+              "      <th>SepalWidthCm</th>\n",
+              "      <th>PetalLengthCm</th>\n",
+              "      <th>PetalWidthCm</th>\n",
+              "      <th>Species</th>\n",
+              "      <th>product</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>5.1</td>\n",
+              "      <td>3.5</td>\n",
+              "      <td>1.4</td>\n",
+              "      <td>0.2</td>\n",
+              "      <td>Iris-setosa</td>\n",
+              "      <td>0.28</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>4.9</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>1.4</td>\n",
+              "      <td>0.2</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>0.28</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>4.7</td>\n",
+              "      <td>3.2</td>\n",
+              "      <td>1.3</td>\n",
+              "      <td>0.2</td>\n",
+              "      <td>Iris-setosa</td>\n",
+              "      <td>0.26</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>NaN</td>\n",
+              "      <td>3.1</td>\n",
+              "      <td>1.5</td>\n",
+              "      <td>0.2</td>\n",
+              "      <td>Iris-setosa</td>\n",
+              "      <td>0.30</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>4.6</td>\n",
+              "      <td>3.4</td>\n",
+              "      <td>1.4</td>\n",
+              "      <td>0.3</td>\n",
+              "      <td>Iris-setosa</td>\n",
+              "      <td>0.42</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>...</th>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>145</th>\n",
+              "      <td>6.7</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>5.2</td>\n",
+              "      <td>2.3</td>\n",
+              "      <td>Iris-virginica</td>\n",
+              "      <td>11.96</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>146</th>\n",
+              "      <td>6.3</td>\n",
+              "      <td>2.5</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>1.9</td>\n",
+              "      <td>Iris-virginica</td>\n",
+              "      <td>9.50</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>147</th>\n",
+              "      <td>6.5</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>5.2</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>Iris-virginica</td>\n",
+              "      <td>10.40</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>148</th>\n",
+              "      <td>6.2</td>\n",
+              "      <td>3.4</td>\n",
+              "      <td>5.4</td>\n",
+              "      <td>2.3</td>\n",
+              "      <td>Iris-virginica</td>\n",
+              "      <td>12.42</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>149</th>\n",
+              "      <td>5.9</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>5.1</td>\n",
+              "      <td>1.8</td>\n",
+              "      <td>Iris-virginica</td>\n",
+              "      <td>9.18</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "<p>148 rows × 6 columns</p>\n",
+              "</div>\n",
+              "    <div class=\"colab-df-buttons\">\n",
+              "\n",
+              "  <div class=\"colab-df-container\">\n",
+              "    <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-0f20b16a-db30-4167-9cca-85934c7cbac3')\"\n",
+              "            title=\"Convert this dataframe to an interactive table.\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewBox=\"0 -960 960 960\">\n",
+              "    <path d=\"M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z\"/>\n",
+              "  </svg>\n",
+              "    </button>\n",
+              "\n",
+              "  <style>\n",
+              "    .colab-df-container {\n",
+              "      display:flex;\n",
+              "      gap: 12px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert {\n",
+              "      background-color: #E8F0FE;\n",
+              "      border: none;\n",
+              "      border-radius: 50%;\n",
+              "      cursor: pointer;\n",
+              "      display: none;\n",
+              "      fill: #1967D2;\n",
+              "      height: 32px;\n",
+              "      padding: 0 0 0 0;\n",
+              "      width: 32px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert:hover {\n",
+              "      background-color: #E2EBFA;\n",
+              "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "      fill: #174EA6;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-buttons div {\n",
+              "      margin-bottom: 4px;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert {\n",
+              "      background-color: #3B4455;\n",
+              "      fill: #D2E3FC;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert:hover {\n",
+              "      background-color: #434B5C;\n",
+              "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
+              "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
+              "      fill: #FFFFFF;\n",
+              "    }\n",
+              "  </style>\n",
+              "\n",
+              "    <script>\n",
+              "      const buttonEl =\n",
+              "        document.querySelector('#df-0f20b16a-db30-4167-9cca-85934c7cbac3 button.colab-df-convert');\n",
+              "      buttonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "\n",
+              "      async function convertToInteractive(key) {\n",
+              "        const element = document.querySelector('#df-0f20b16a-db30-4167-9cca-85934c7cbac3');\n",
+              "        const dataTable =\n",
+              "          await google.colab.kernel.invokeFunction('convertToInteractive',\n",
+              "                                                    [key], {});\n",
+              "        if (!dataTable) return;\n",
+              "\n",
+              "        const docLinkHtml = 'Like what you see? Visit the ' +\n",
+              "          '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
+              "          + ' to learn more about interactive tables.';\n",
+              "        element.innerHTML = '';\n",
+              "        dataTable['output_type'] = 'display_data';\n",
+              "        await google.colab.output.renderOutput(dataTable, element);\n",
+              "        const docLink = document.createElement('div');\n",
+              "        docLink.innerHTML = docLinkHtml;\n",
+              "        element.appendChild(docLink);\n",
+              "      }\n",
+              "    </script>\n",
+              "  </div>\n",
+              "\n",
+              "\n",
+              "<div id=\"df-4125cfa3-3506-40b6-af10-bd18502884e0\">\n",
+              "  <button class=\"colab-df-quickchart\" onclick=\"quickchart('df-4125cfa3-3506-40b6-af10-bd18502884e0')\"\n",
+              "            title=\"Suggest charts\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\"viewBox=\"0 0 24 24\"\n",
+              "     width=\"24px\">\n",
+              "    <g>\n",
+              "        <path d=\"M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z\"/>\n",
+              "    </g>\n",
+              "</svg>\n",
+              "  </button>\n",
+              "\n",
+              "<style>\n",
+              "  .colab-df-quickchart {\n",
+              "      --bg-color: #E8F0FE;\n",
+              "      --fill-color: #1967D2;\n",
+              "      --hover-bg-color: #E2EBFA;\n",
+              "      --hover-fill-color: #174EA6;\n",
+              "      --disabled-fill-color: #AAA;\n",
+              "      --disabled-bg-color: #DDD;\n",
+              "  }\n",
+              "\n",
+              "  [theme=dark] .colab-df-quickchart {\n",
+              "      --bg-color: #3B4455;\n",
+              "      --fill-color: #D2E3FC;\n",
+              "      --hover-bg-color: #434B5C;\n",
+              "      --hover-fill-color: #FFFFFF;\n",
+              "      --disabled-bg-color: #3B4455;\n",
+              "      --disabled-fill-color: #666;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart {\n",
+              "    background-color: var(--bg-color);\n",
+              "    border: none;\n",
+              "    border-radius: 50%;\n",
+              "    cursor: pointer;\n",
+              "    display: none;\n",
+              "    fill: var(--fill-color);\n",
+              "    height: 32px;\n",
+              "    padding: 0;\n",
+              "    width: 32px;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart:hover {\n",
+              "    background-color: var(--hover-bg-color);\n",
+              "    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "    fill: var(--button-hover-fill-color);\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart-complete:disabled,\n",
+              "  .colab-df-quickchart-complete:disabled:hover {\n",
+              "    background-color: var(--disabled-bg-color);\n",
+              "    fill: var(--disabled-fill-color);\n",
+              "    box-shadow: none;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-spinner {\n",
+              "    border: 2px solid var(--fill-color);\n",
+              "    border-color: transparent;\n",
+              "    border-bottom-color: var(--fill-color);\n",
+              "    animation:\n",
+              "      spin 1s steps(1) infinite;\n",
+              "  }\n",
+              "\n",
+              "  @keyframes spin {\n",
+              "    0% {\n",
+              "      border-color: transparent;\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "      border-left-color: var(--fill-color);\n",
+              "    }\n",
+              "    20% {\n",
+              "      border-color: transparent;\n",
+              "      border-left-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "    }\n",
+              "    30% {\n",
+              "      border-color: transparent;\n",
+              "      border-left-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "      border-right-color: var(--fill-color);\n",
+              "    }\n",
+              "    40% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "    }\n",
+              "    60% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "    }\n",
+              "    80% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "    }\n",
+              "    90% {\n",
+              "      border-color: transparent;\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "    }\n",
+              "  }\n",
+              "</style>\n",
+              "\n",
+              "  <script>\n",
+              "    async function quickchart(key) {\n",
+              "      const quickchartButtonEl =\n",
+              "        document.querySelector('#' + key + ' button');\n",
+              "      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.\n",
+              "      quickchartButtonEl.classList.add('colab-df-spinner');\n",
+              "      try {\n",
+              "        const charts = await google.colab.kernel.invokeFunction(\n",
+              "            'suggestCharts', [key], {});\n",
+              "      } catch (error) {\n",
+              "        console.error('Error during call to suggestCharts:', error);\n",
+              "      }\n",
+              "      quickchartButtonEl.classList.remove('colab-df-spinner');\n",
+              "      quickchartButtonEl.classList.add('colab-df-quickchart-complete');\n",
+              "    }\n",
+              "    (() => {\n",
+              "      let quickchartButtonEl =\n",
+              "        document.querySelector('#df-4125cfa3-3506-40b6-af10-bd18502884e0 button');\n",
+              "      quickchartButtonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "    })();\n",
+              "  </script>\n",
+              "</div>\n",
+              "    </div>\n",
+              "  </div>\n"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 55
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "iris_df['x^2']=iris_df['PetalLengthCm']*iris_df['PetalLengthCm']\n",
+        "iris_df['y^2']= iris_df['PetalWidthCm']*iris_df['PetalWidthCm']"
+      ],
+      "metadata": {
+        "id": "KuVmZuiz0lgP"
+      },
+      "execution_count": 56,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "sum_row = iris_df.sum(axis=0)  # axis=0 for summing along columns\n",
+        "iris_df = iris_df.append(sum_row, ignore_index=True)\n",
+        "iris_df"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 513
+        },
+        "id": "fr8cHuuCN2BQ",
+        "outputId": "33605e21-9243-4a2f-b402-8b26a2babcde"
+      },
+      "execution_count": 57,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "<ipython-input-57-8c0261bf957b>:1: FutureWarning: The default value of numeric_only in DataFrame.sum is deprecated. In a future version, it will default to False. In addition, specifying 'numeric_only=None' is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.\n",
+            "  sum_row = iris_df.sum(axis=0)  # axis=0 for summing along columns\n",
+            "<ipython-input-57-8c0261bf957b>:2: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.\n",
+            "  iris_df = iris_df.append(sum_row, ignore_index=True)\n"
+          ]
+        },
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "     SepalLengthCm  SepalWidthCm  PetalLengthCm  PetalWidthCm         Species  \\\n",
+              "0              5.1           3.5            1.4           0.2     Iris-setosa   \n",
+              "1              4.9           NaN            1.4           0.2             NaN   \n",
+              "2              4.7           3.2            1.3           0.2     Iris-setosa   \n",
+              "3              NaN           3.1            1.5           0.2     Iris-setosa   \n",
+              "4              4.6           3.4            1.4           0.3     Iris-setosa   \n",
+              "..             ...           ...            ...           ...             ...   \n",
+              "144            6.3           2.5            5.0           1.9  Iris-virginica   \n",
+              "145            6.5           3.0            5.2           2.0  Iris-virginica   \n",
+              "146            6.2           3.4            5.4           2.3  Iris-virginica   \n",
+              "147            5.9           3.0            5.1           1.8  Iris-virginica   \n",
+              "148          861.5         447.6          560.7         179.2             NaN   \n",
+              "\n",
+              "     product      x^2     y^2  \n",
+              "0       0.28     1.96    0.04  \n",
+              "1       0.28     1.96    0.04  \n",
+              "2       0.26     1.69    0.04  \n",
+              "3       0.30     2.25    0.04  \n",
+              "4       0.42     1.96    0.09  \n",
+              "..       ...      ...     ...  \n",
+              "144     9.50    25.00    3.61  \n",
+              "145    10.40    27.04    4.00  \n",
+              "146    12.42    29.16    5.29  \n",
+              "147     9.18    26.01    3.24  \n",
+              "148   868.01  2578.15  302.10  \n",
+              "\n",
+              "[149 rows x 8 columns]"
+            ],
+            "text/html": [
+              "\n",
+              "  <div id=\"df-868e002c-7f4b-49b7-999a-ed1bfa586f0c\" class=\"colab-df-container\">\n",
+              "    <div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>SepalLengthCm</th>\n",
+              "      <th>SepalWidthCm</th>\n",
+              "      <th>PetalLengthCm</th>\n",
+              "      <th>PetalWidthCm</th>\n",
+              "      <th>Species</th>\n",
+              "      <th>product</th>\n",
+              "      <th>x^2</th>\n",
+              "      <th>y^2</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>5.1</td>\n",
+              "      <td>3.5</td>\n",
+              "      <td>1.4</td>\n",
+              "      <td>0.2</td>\n",
+              "      <td>Iris-setosa</td>\n",
+              "      <td>0.28</td>\n",
+              "      <td>1.96</td>\n",
+              "      <td>0.04</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>4.9</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>1.4</td>\n",
+              "      <td>0.2</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>0.28</td>\n",
+              "      <td>1.96</td>\n",
+              "      <td>0.04</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>4.7</td>\n",
+              "      <td>3.2</td>\n",
+              "      <td>1.3</td>\n",
+              "      <td>0.2</td>\n",
+              "      <td>Iris-setosa</td>\n",
+              "      <td>0.26</td>\n",
+              "      <td>1.69</td>\n",
+              "      <td>0.04</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>NaN</td>\n",
+              "      <td>3.1</td>\n",
+              "      <td>1.5</td>\n",
+              "      <td>0.2</td>\n",
+              "      <td>Iris-setosa</td>\n",
+              "      <td>0.30</td>\n",
+              "      <td>2.25</td>\n",
+              "      <td>0.04</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>4.6</td>\n",
+              "      <td>3.4</td>\n",
+              "      <td>1.4</td>\n",
+              "      <td>0.3</td>\n",
+              "      <td>Iris-setosa</td>\n",
+              "      <td>0.42</td>\n",
+              "      <td>1.96</td>\n",
+              "      <td>0.09</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>...</th>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>144</th>\n",
+              "      <td>6.3</td>\n",
+              "      <td>2.5</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>1.9</td>\n",
+              "      <td>Iris-virginica</td>\n",
+              "      <td>9.50</td>\n",
+              "      <td>25.00</td>\n",
+              "      <td>3.61</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>145</th>\n",
+              "      <td>6.5</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>5.2</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>Iris-virginica</td>\n",
+              "      <td>10.40</td>\n",
+              "      <td>27.04</td>\n",
+              "      <td>4.00</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>146</th>\n",
+              "      <td>6.2</td>\n",
+              "      <td>3.4</td>\n",
+              "      <td>5.4</td>\n",
+              "      <td>2.3</td>\n",
+              "      <td>Iris-virginica</td>\n",
+              "      <td>12.42</td>\n",
+              "      <td>29.16</td>\n",
+              "      <td>5.29</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>147</th>\n",
+              "      <td>5.9</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>5.1</td>\n",
+              "      <td>1.8</td>\n",
+              "      <td>Iris-virginica</td>\n",
+              "      <td>9.18</td>\n",
+              "      <td>26.01</td>\n",
+              "      <td>3.24</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>148</th>\n",
+              "      <td>861.5</td>\n",
+              "      <td>447.6</td>\n",
+              "      <td>560.7</td>\n",
+              "      <td>179.2</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>868.01</td>\n",
+              "      <td>2578.15</td>\n",
+              "      <td>302.10</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "<p>149 rows × 8 columns</p>\n",
+              "</div>\n",
+              "    <div class=\"colab-df-buttons\">\n",
+              "\n",
+              "  <div class=\"colab-df-container\">\n",
+              "    <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-868e002c-7f4b-49b7-999a-ed1bfa586f0c')\"\n",
+              "            title=\"Convert this dataframe to an interactive table.\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewBox=\"0 -960 960 960\">\n",
+              "    <path d=\"M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z\"/>\n",
+              "  </svg>\n",
+              "    </button>\n",
+              "\n",
+              "  <style>\n",
+              "    .colab-df-container {\n",
+              "      display:flex;\n",
+              "      gap: 12px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert {\n",
+              "      background-color: #E8F0FE;\n",
+              "      border: none;\n",
+              "      border-radius: 50%;\n",
+              "      cursor: pointer;\n",
+              "      display: none;\n",
+              "      fill: #1967D2;\n",
+              "      height: 32px;\n",
+              "      padding: 0 0 0 0;\n",
+              "      width: 32px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert:hover {\n",
+              "      background-color: #E2EBFA;\n",
+              "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "      fill: #174EA6;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-buttons div {\n",
+              "      margin-bottom: 4px;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert {\n",
+              "      background-color: #3B4455;\n",
+              "      fill: #D2E3FC;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert:hover {\n",
+              "      background-color: #434B5C;\n",
+              "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
+              "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
+              "      fill: #FFFFFF;\n",
+              "    }\n",
+              "  </style>\n",
+              "\n",
+              "    <script>\n",
+              "      const buttonEl =\n",
+              "        document.querySelector('#df-868e002c-7f4b-49b7-999a-ed1bfa586f0c button.colab-df-convert');\n",
+              "      buttonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "\n",
+              "      async function convertToInteractive(key) {\n",
+              "        const element = document.querySelector('#df-868e002c-7f4b-49b7-999a-ed1bfa586f0c');\n",
+              "        const dataTable =\n",
+              "          await google.colab.kernel.invokeFunction('convertToInteractive',\n",
+              "                                                    [key], {});\n",
+              "        if (!dataTable) return;\n",
+              "\n",
+              "        const docLinkHtml = 'Like what you see? Visit the ' +\n",
+              "          '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
+              "          + ' to learn more about interactive tables.';\n",
+              "        element.innerHTML = '';\n",
+              "        dataTable['output_type'] = 'display_data';\n",
+              "        await google.colab.output.renderOutput(dataTable, element);\n",
+              "        const docLink = document.createElement('div');\n",
+              "        docLink.innerHTML = docLinkHtml;\n",
+              "        element.appendChild(docLink);\n",
+              "      }\n",
+              "    </script>\n",
+              "  </div>\n",
+              "\n",
+              "\n",
+              "<div id=\"df-2711a95f-114d-4431-8ca7-b334c9699179\">\n",
+              "  <button class=\"colab-df-quickchart\" onclick=\"quickchart('df-2711a95f-114d-4431-8ca7-b334c9699179')\"\n",
+              "            title=\"Suggest charts\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\"viewBox=\"0 0 24 24\"\n",
+              "     width=\"24px\">\n",
+              "    <g>\n",
+              "        <path d=\"M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z\"/>\n",
+              "    </g>\n",
+              "</svg>\n",
+              "  </button>\n",
+              "\n",
+              "<style>\n",
+              "  .colab-df-quickchart {\n",
+              "      --bg-color: #E8F0FE;\n",
+              "      --fill-color: #1967D2;\n",
+              "      --hover-bg-color: #E2EBFA;\n",
+              "      --hover-fill-color: #174EA6;\n",
+              "      --disabled-fill-color: #AAA;\n",
+              "      --disabled-bg-color: #DDD;\n",
+              "  }\n",
+              "\n",
+              "  [theme=dark] .colab-df-quickchart {\n",
+              "      --bg-color: #3B4455;\n",
+              "      --fill-color: #D2E3FC;\n",
+              "      --hover-bg-color: #434B5C;\n",
+              "      --hover-fill-color: #FFFFFF;\n",
+              "      --disabled-bg-color: #3B4455;\n",
+              "      --disabled-fill-color: #666;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart {\n",
+              "    background-color: var(--bg-color);\n",
+              "    border: none;\n",
+              "    border-radius: 50%;\n",
+              "    cursor: pointer;\n",
+              "    display: none;\n",
+              "    fill: var(--fill-color);\n",
+              "    height: 32px;\n",
+              "    padding: 0;\n",
+              "    width: 32px;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart:hover {\n",
+              "    background-color: var(--hover-bg-color);\n",
+              "    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "    fill: var(--button-hover-fill-color);\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart-complete:disabled,\n",
+              "  .colab-df-quickchart-complete:disabled:hover {\n",
+              "    background-color: var(--disabled-bg-color);\n",
+              "    fill: var(--disabled-fill-color);\n",
+              "    box-shadow: none;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-spinner {\n",
+              "    border: 2px solid var(--fill-color);\n",
+              "    border-color: transparent;\n",
+              "    border-bottom-color: var(--fill-color);\n",
+              "    animation:\n",
+              "      spin 1s steps(1) infinite;\n",
+              "  }\n",
+              "\n",
+              "  @keyframes spin {\n",
+              "    0% {\n",
+              "      border-color: transparent;\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "      border-left-color: var(--fill-color);\n",
+              "    }\n",
+              "    20% {\n",
+              "      border-color: transparent;\n",
+              "      border-left-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "    }\n",
+              "    30% {\n",
+              "      border-color: transparent;\n",
+              "      border-left-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "      border-right-color: var(--fill-color);\n",
+              "    }\n",
+              "    40% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "    }\n",
+              "    60% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "    }\n",
+              "    80% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "    }\n",
+              "    90% {\n",
+              "      border-color: transparent;\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "    }\n",
+              "  }\n",
+              "</style>\n",
+              "\n",
+              "  <script>\n",
+              "    async function quickchart(key) {\n",
+              "      const quickchartButtonEl =\n",
+              "        document.querySelector('#' + key + ' button');\n",
+              "      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.\n",
+              "      quickchartButtonEl.classList.add('colab-df-spinner');\n",
+              "      try {\n",
+              "        const charts = await google.colab.kernel.invokeFunction(\n",
+              "            'suggestCharts', [key], {});\n",
+              "      } catch (error) {\n",
+              "        console.error('Error during call to suggestCharts:', error);\n",
+              "      }\n",
+              "      quickchartButtonEl.classList.remove('colab-df-spinner');\n",
+              "      quickchartButtonEl.classList.add('colab-df-quickchart-complete');\n",
+              "    }\n",
+              "    (() => {\n",
+              "      let quickchartButtonEl =\n",
+              "        document.querySelector('#df-2711a95f-114d-4431-8ca7-b334c9699179 button');\n",
+              "      quickchartButtonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "    })();\n",
+              "  </script>\n",
+              "</div>\n",
+              "    </div>\n",
+              "  </div>\n"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 57
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "n = len(iris_df)-1\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "P223SnnBPZFr"
+      },
+      "execution_count": 58,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "numerator = n * iris_df.loc[n, 'product'] - iris_df.loc[n,'PetalLengthCm'] * iris_df.loc[n,'PetalWidthCm']\n",
+        "denominator = np.sqrt((n * iris_df.loc[n, 'x^2'] - (iris_df.loc[n,'PetalLengthCm'])**2) * (n * iris_df.loc[n, 'y^2'] - (iris_df.loc[n,'PetalWidthCm'])**2))\n",
+        "r = numerator / denominator\n",
+        "\n",
+        "\n",
+        "print(iris_df)\n",
+        "print(\"\\nPearson Correlation Coefficient (r):\", r)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "yuzHmVeN5QHw",
+        "outputId": "7596d540-5e85-4db2-9cef-b2cb51d21f38"
+      },
+      "execution_count": 60,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "     SepalLengthCm  SepalWidthCm  PetalLengthCm  PetalWidthCm         Species  \\\n",
+            "0              5.1           3.5            1.4           0.2     Iris-setosa   \n",
+            "1              4.9           NaN            1.4           0.2             NaN   \n",
+            "2              4.7           3.2            1.3           0.2     Iris-setosa   \n",
+            "3              NaN           3.1            1.5           0.2     Iris-setosa   \n",
+            "4              4.6           3.4            1.4           0.3     Iris-setosa   \n",
+            "..             ...           ...            ...           ...             ...   \n",
+            "144            6.3           2.5            5.0           1.9  Iris-virginica   \n",
+            "145            6.5           3.0            5.2           2.0  Iris-virginica   \n",
+            "146            6.2           3.4            5.4           2.3  Iris-virginica   \n",
+            "147            5.9           3.0            5.1           1.8  Iris-virginica   \n",
+            "148          861.5         447.6          560.7         179.2             NaN   \n",
+            "\n",
+            "     product      x^2     y^2  \n",
+            "0       0.28     1.96    0.04  \n",
+            "1       0.28     1.96    0.04  \n",
+            "2       0.26     1.69    0.04  \n",
+            "3       0.30     2.25    0.04  \n",
+            "4       0.42     1.96    0.09  \n",
+            "..       ...      ...     ...  \n",
+            "144     9.50    25.00    3.61  \n",
+            "145    10.40    27.04    4.00  \n",
+            "146    12.42    29.16    5.29  \n",
+            "147     9.18    26.01    3.24  \n",
+            "148   868.01  2578.15  302.10  \n",
+            "\n",
+            "[149 rows x 8 columns]\n",
+            "\n",
+            "Pearson Correlation Coefficient (r): 0.9620405969458063\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "qd2qAG10WeSY"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
